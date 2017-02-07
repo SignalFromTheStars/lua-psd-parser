@@ -17,10 +17,10 @@ Adobe documentation on the PSD file format: http://www.adobe.com/devnet-apps/pho
 ## artal.lua
 ```lua
 artal = require("artal")
-psdTable = artal.newPSD(FileNameOrFileData) -- full structure with the layers loaded in as images.
-psdTable = artal.newPSD(FileNameOrFileData, "info") -- full structure.
+psdTable       = artal.newPSD(FileNameOrFileData)              -- full structure with the layers loaded in as images.
+psdTable       = artal.newPSD(FileNameOrFileData, "info")      -- full structure.
 ImageDataOrNil = artal.newPSD(FileNameOrFileData, layerNumber) -- ImageData for the specified layer number.
-ImageData = artal.newPSD(FileNameOrFileData, "composed")
+ImageData      = artal.newPSD(FileNameOrFileData, "composed")
 -- ImageData of the composed image as it's stored in the psd file itself.
 -- Note that Photoshop has an slightly erroneous implementation composing the alpha into the composed image.
 -- So images without a fully opaque background will be slightly blended with white.
@@ -30,7 +30,7 @@ ImageData = artal.newPSD(FileNameOrFileData, "composed")
 ![](https://u.pomf.is/klltkn.png)
 ```lua
 local artal = require("artal")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(255, 255, 255)
 
 img = artal.newPSD("sample.psd")
 
@@ -38,11 +38,11 @@ function love.draw()
 	for i = 1, #img do
         love.graphics.draw(
             img[i].image,
-            nil, -- Position X
-            nil, -- Position Y
-            nil, -- Rotation
-            nil, -- Scale X
-            nil, -- Scale Y
+            nil,       -- Position X
+            nil,       -- Position Y
+            nil,       -- Rotation
+            nil,       -- Scale X
+            nil,       -- Scale Y
             img[i].ox, -- Offset X
             img[i].oy) -- Offset Y
     end
@@ -53,43 +53,43 @@ end
 ![](https://u.pomf.is/vrwgck.png)
 ```lua
 local artal = require("artal")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(255, 255, 255)
 
 img = artal.newPSD("sample.psd")
 
 function love.draw()
 
 	-- Image info.
-	love.graphics.setColor(0,0,0)
-	love.graphics.print("Global Image info", 0, 14*0)
-	love.graphics.print("Layer Count: "..#img, 0, 14*1)
-	love.graphics.print("Width: "..img.width, 0, 14*2)
-	love.graphics.print("Height: "..img.height, 0, 14*3)
+	love.graphics.setColor(0, 0, 0)
+	love.graphics.print("Global Image info",         0, 14 * 0)
+	love.graphics.print("Layer Count: "..#img,       0, 14 * 1)
+	love.graphics.print("Width: "..      img.width,  0, 14 * 2)
+	love.graphics.print("Height: "..     img.height, 0, 14 * 3)
 	for i = 1, #img do
-		love.graphics.setColor(0,0,0)
-		love.graphics.print("Layer index: "..i, (i-1)*200, 70+14*0)
-		love.graphics.print("name: "..img[i].name, (i-1)*200, 70+14*1)
-		love.graphics.print("type: "..img[i].type, (i-1)*200, 70+14*2)
-		love.graphics.print("blend: "..img[i].blend, (i-1)*200, 70+14*3)
-		love.graphics.print("clip: "..tostring(img[i].clip), (i-1)*200, 70+14*4)
-		love.graphics.print("ox: "..img[i].ox, (i-1)*200, 70+14*5)
-		love.graphics.print("oy: "..img[i].oy, (i-1)*200, 70+14*6)
-		love.graphics.print("getWidth: "..img[i].image:getWidth(), (i-1)*200, 70+14*7)
-		love.graphics.print("getHeight: "..img[i].image:getHeight(), (i-1)*200, 70+14*8)
+		love.graphics.setColor(0, 0, 0)
+		love.graphics.print("Layer index: "..i,                        (i - 1) * 200, 70 + 14 * 0)
+		love.graphics.print("name: "..       img[i].name,              (i - 1) * 200, 70 + 14 * 1)
+		love.graphics.print("type: "..       img[i].type,              (i - 1) * 200, 70 + 14 * 2)
+		love.graphics.print("blend: "..      img[i].blend,             (i - 1) * 200, 70 + 14 * 3)
+		love.graphics.print("clip: "..       tostring(img[i].clip),    (i - 1) * 200, 70 + 14 * 4)
+		love.graphics.print("ox: "..         img[i].ox,                (i - 1) * 200, 70 + 14 * 5)
+		love.graphics.print("oy: "..         img[i].oy,                (i - 1) * 200, 70 + 14 * 6)
+		love.graphics.print("getWidth: "..   img[i].image:getWidth(),  (i - 1) * 200, 70 + 14 * 7)
+		love.graphics.print("getHeight: "..  img[i].image:getHeight(), (i - 1) * 200, 70 + 14 * 8)
 		
 		-- Bounding Boxes
 		love.graphics.rectangle(
 			"line",
-			(i-1)*200-img[i].ox-0.5,
-			70+14*9-img[i].oy-0.5,
-			img[i].image:getWidth()+1,
-			img[i].image:getHeight()+1)
+			(i - 1) * 200 - img[i].ox - 0.5,
+			70 + 14 * 9   - img[i].oy - 0.5,
+			img[i].image:getWidth()  + 1,
+			img[i].image:getHeight() + 1)
 
-		love.graphics.setColor(255,255,255)
+		love.graphics.setColor(255, 255, 255)
 		love.graphics.draw(
 			img[i].image,
-			(i-1)*200,
-			70+14*9,
+			(i - 1) * 200,
+			70 + 14 * 9,
 			nil,
 			nil,
 			nil,
@@ -104,7 +104,7 @@ These are the type of layers
 ```
 "image" = image layer with imagedata.
 "empty" = image layer without imagedata.
-"open" = beginning of group layer.
+"open"  = beginning of group layer.
 "close" = end of group layer.
 ```
 Layers between an `"open"` and a `"close"` are nested inside that group.
@@ -148,7 +148,7 @@ There's sample code for these first 5 blendmodes.
 ![](https://u.pomf.is/exmlfg.png)
 ```lua
 local artal = require("artal")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(255, 255, 255)
 
 local fileData = love.filesystem.newFileData("sample.psd")
 img = artal.newPSD(fileData,"info")
@@ -254,15 +254,15 @@ psdShader.setShader(shader, canvas1, canvas2)
 
 -- Rotation and shearing not implemented. love.graphics.push() and friends does not work either.
 -- The image that is passed in is also retained. Unlike love.graphics.draw().
-psdShader.drawClip(drawOrderIndex,image,x,y,r,sx,sy,ox,oy,kx,ky) 
+psdShader.drawClip(drawOrderIndex, image, x, y, r, sx, sy, ox, oy, kx, ky) 
 resultCanvas = psdShader.flatten(psdTableClipTo, psdTableBeingClipped, ...)
 ```
 ### Clipping sample
 ![](https://u.pomf.is/ubvsna.png)
 ```lua
-local artal = require("artal")
+local artal     = require("artal")
 local psdShader = require("psdShader")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(255, 255, 255)
 
 img = artal.newPSD("sample.psd")
 
@@ -270,11 +270,11 @@ local blendShader = {}
 blendShader.clip = love.graphics.newShader(psdShader.createShaderString("norm", "norm", "over"))
 
 function love.draw()
-	love.graphics.draw(img[1].image,nil,nil,nil,nil,nil,img[1].ox,img[1].oy)
+	love.graphics.draw(   img[1].image, nil, nil, nil, nil, nil, img[1].ox, img[1].oy)
 	psdShader.setShader(blendShader.clip)
-	psdShader.drawClip(1,img[3].image,nil,nil,nil,nil,nil,img[3].ox,img[3].oy)
-	psdShader.drawClip(2,img[4].image,nil,nil,nil,nil,nil,img[4].ox,img[4].oy)
-	love.graphics.draw(img[2].image,nil,nil,nil,nil,nil,img[2].ox,img[2].oy)
+	psdShader.drawClip(1, img[3].image, nil, nil, nil, nil, nil, img[3].ox, img[3].oy)
+	psdShader.drawClip(2, img[4].image, nil, nil, nil, nil, nil, img[4].ox, img[4].oy)
+	love.graphics.draw(   img[2].image, nil, nil, nil, nil, nil, img[2].ox, img[2].oy)
 	love.graphics.setShader()
 end
 ```
@@ -282,14 +282,14 @@ end
 ### Blendmode sample
 ![](https://u.pomf.is/ntxeen.png)
 ```lua
-local artal = require("artal")
+local artal     = require("artal")
 local psdShader = require("psdShader")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(255, 255, 255)
 
 img = artal.newPSD("sample.psd")
 
 local blendShader = {}
-blendShader.mul = love.graphics.newShader(psdShader.createShaderString("mul"))
+blendShader.mul  = love.graphics.newShader(psdShader.createShaderString("mul"))
 blendShader.scrn = love.graphics.newShader(psdShader.createShaderString("scrn"))
 blendShader.over = love.graphics.newShader(psdShader.createShaderString("over"))
 
@@ -300,23 +300,23 @@ canvas[2] = love.graphics.newCanvas(love.graphics.getDimensions())
 function love.draw()
 
 	love.graphics.setCanvas(canvas[1])
-	love.graphics.clear(255,255,255)
+	love.graphics.clear(255, 255, 255)
 
 	for i = 1, #img do
-		if img[i].blend == "mul" or
+		if  img[i].blend == "mul" or
 			img[i].blend == "over" or
 			img[i].blend == "scrn" then
 			
-			psdShader.setShader(blendShader[img[i].blend],canvas[1],canvas[2])
+			psdShader.setShader(blendShader[img[i].blend], canvas[1], canvas[2])
 		end
-		love.graphics.draw(img[i].image,nil,nil,nil,nil,nil,img[i].ox,img[i].oy)
+		love.graphics.draw(img[i].image, nil, nil, nil, nil, nil, img[i].ox, img[i].oy)
 		love.graphics.setShader()
 	end
 	
 	-- Draw result to screen
 	local preCanvas = love.graphics.getCanvas()
 	love.graphics.setCanvas(nil)
-	love.graphics.setBlendMode("alpha","premultiplied")
+	love.graphics.setBlendMode("alpha", "premultiplied")
 	love.graphics.draw(preCanvas)
 	love.graphics.setBlendMode("alpha")
 end
@@ -324,9 +324,9 @@ end
 ### Blend and Clipping
 ![](https://u.pomf.is/zjpidx.png)
 ```lua
-local artal = require("artal")
+local artal     = require("artal")
 local psdShader = require("psdShader")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(255, 255, 255)
 
 img = artal.newPSD("sample.psd")
 
@@ -339,19 +339,19 @@ canvas[2] = love.graphics.newCanvas(love.graphics.getDimensions())
 
 function love.draw()
 	love.graphics.setCanvas(canvas[1])
-	love.graphics.clear(255,255,255)
+	love.graphics.clear(255, 255, 255)
 
-	love.graphics.draw(img[1].image,nil,nil,nil,nil,nil,img[1].ox,img[1].oy)
+	love.graphics.draw(   img[1].image, nil, nil, nil, nil, nil, img[1].ox, img[1].oy)
     psdShader.setShader(blendShader.clipAndBlend, canvas[1], canvas[2])
-    psdShader.drawClip(1,img[3].image,nil,nil,nil,nil,nil,img[3].ox,img[3].oy)
-    psdShader.drawClip(2,img[4].image,nil,nil,nil,nil,nil,img[4].ox,img[4].oy)
-    love.graphics.draw(img[2].image,nil,nil,nil,nil,nil,img[2].ox,img[2].oy)
+    psdShader.drawClip(1, img[3].image, nil, nil, nil, nil, nil, img[3].ox, img[3].oy)
+    psdShader.drawClip(2, img[4].image, nil, nil, nil, nil, nil, img[4].ox, img[4].oy)
+    love.graphics.draw(   img[2].image, nil, nil, nil, nil, nil, img[2].ox, img[2].oy)
     love.graphics.setShader()
 	
 	-- Draw result to screen
 	local preCanvas = love.graphics.getCanvas()
 	love.graphics.setCanvas(nil)
-	love.graphics.setBlendMode("alpha","premultiplied")
+	love.graphics.setBlendMode("alpha", "premultiplied")
 	love.graphics.draw(preCanvas)
 	love.graphics.setBlendMode("alpha")
 end
