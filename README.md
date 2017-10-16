@@ -12,7 +12,7 @@ Purpose is to expose the structure of .PSD files into LÖVE.
 
 Adobe documentation on the PSD file format: http://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
 
-![](https://u.pomf.is/sbzsva.gif)
+![](https://a.pomf.cat/lvbzvp.gif)
 
 ## artal.lua
 ```lua
@@ -27,7 +27,7 @@ ImageData      = artal.newPSD(FileNameOrFileData, "composed")
 ```
 
 ### Sample code:
-![](https://u.pomf.is/klltkn.png)
+![](https://a.pomf.cat/ynqysy.png)
 ```lua
 local artal = require("artal")
 love.graphics.setBackgroundColor(255, 255, 255)
@@ -50,7 +50,7 @@ end
 ```
 
 ### Full structure artal extracts from the psd.
-![](https://u.pomf.is/vrwgck.png)
+![](https://a.pomf.cat/aobdrd.png)
 ```lua
 local artal = require("artal")
 love.graphics.setBackgroundColor(255, 255, 255)
@@ -145,7 +145,7 @@ There's sample code for these first 5 blendmodes.
 ```
 
 ### Loading specific layers.
-![](https://u.pomf.is/exmlfg.png)
+![](https://a.pomf.cat/uuykmu.png)
 ```lua
 local artal = require("artal")
 love.graphics.setBackgroundColor(255, 255, 255)
@@ -258,7 +258,7 @@ psdShader.drawClip(drawOrderIndex, image, x, y, r, sx, sy, ox, oy, kx, ky)
 resultCanvas = psdShader.flatten(psdTableClipTo, psdTableBeingClipped, ...)
 ```
 ### Clipping sample
-![](https://u.pomf.is/ubvsna.png)
+![](https://a.pomf.cat/lrjlcb.png)
 ```lua
 local artal     = require("artal")
 local psdShader = require("psdShader")
@@ -280,7 +280,7 @@ end
 ```
 
 ### Blendmode sample
-![](https://u.pomf.is/ntxeen.png)
+![](https://a.pomf.cat/wjnszj.png)
 ```lua
 local artal     = require("artal")
 local psdShader = require("psdShader")
@@ -322,7 +322,7 @@ function love.draw()
 end
 ```
 ### Blend and Clipping
-![](https://u.pomf.is/zjpidx.png)
+![](https://a.pomf.cat/klhgyg.png)
 ```lua
 local artal     = require("artal")
 local psdShader = require("psdShader")
