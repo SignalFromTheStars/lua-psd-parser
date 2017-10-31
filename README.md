@@ -12,7 +12,7 @@ Purpose is to expose the structure of .PSD files into LÖVE.
 
 Adobe documentation on the PSD file format: http://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
 
-![](https://a.pomf.cat/lvbzvp.gif)
+![](https://a.pomf.cat/fjbcjd.gif)
 
 ## artal.lua
 ```lua
