@@ -30,12 +30,12 @@ ImageData = artal.newPSD(FileNameOrFileData, "composed")
 ![](https://u.pomf.is/klltkn.png)
 ```lua
 local artal = require("artal")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(1, 1, 1)
 
 img = artal.newPSD("sample.psd")
 
 function love.draw()
-	for i = 1, #img do
+    for i = 1, #img do
         love.graphics.draw(
             img[i].image,
             nil, -- Position X
@@ -53,50 +53,50 @@ end
 ![](https://u.pomf.is/vrwgck.png)
 ```lua
 local artal = require("artal")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(1, 1, 1)
 
 img = artal.newPSD("sample.psd")
 
 function love.draw()
 
-	-- Image info.
-	love.graphics.setColor(0,0,0)
-	love.graphics.print("Global Image info", 0, 14*0)
-	love.graphics.print("Layer Count: "..#img, 0, 14*1)
-	love.graphics.print("Width: "..img.width, 0, 14*2)
-	love.graphics.print("Height: "..img.height, 0, 14*3)
-	for i = 1, #img do
-		love.graphics.setColor(0,0,0)
-		love.graphics.print("Layer index: "..i, (i-1)*200, 70+14*0)
-		love.graphics.print("name: "..img[i].name, (i-1)*200, 70+14*1)
-		love.graphics.print("type: "..img[i].type, (i-1)*200, 70+14*2)
-		love.graphics.print("blend: "..img[i].blend, (i-1)*200, 70+14*3)
-		love.graphics.print("clip: "..tostring(img[i].clip), (i-1)*200, 70+14*4)
-		love.graphics.print("ox: "..img[i].ox, (i-1)*200, 70+14*5)
-		love.graphics.print("oy: "..img[i].oy, (i-1)*200, 70+14*6)
-		love.graphics.print("getWidth: "..img[i].image:getWidth(), (i-1)*200, 70+14*7)
-		love.graphics.print("getHeight: "..img[i].image:getHeight(), (i-1)*200, 70+14*8)
-		
-		-- Bounding Boxes
-		love.graphics.rectangle(
-			"line",
-			(i-1)*200-img[i].ox-0.5,
-			70+14*9-img[i].oy-0.5,
-			img[i].image:getWidth()+1,
-			img[i].image:getHeight()+1)
+    -- Image info.
+    love.graphics.setColor(0,0,0)
+    love.graphics.print("Global Image info", 0, 14*0)
+    love.graphics.print("Layer Count: "..#img, 0, 14*1)
+    love.graphics.print("Width: "..img.width, 0, 14*2)
+    love.graphics.print("Height: "..img.height, 0, 14*3)
+    for i = 1, #img do
+        love.graphics.setColor(0,0,0)
+        love.graphics.print("Layer index: "..i, (i-1)*200, 70+14*0)
+        love.graphics.print("name: "..img[i].name, (i-1)*200, 70+14*1)
+        love.graphics.print("type: "..img[i].type, (i-1)*200, 70+14*2)
+        love.graphics.print("blend: "..img[i].blend, (i-1)*200, 70+14*3)
+        love.graphics.print("clip: "..tostring(img[i].clip), (i-1)*200, 70+14*4)
+        love.graphics.print("ox: "..img[i].ox, (i-1)*200, 70+14*5)
+        love.graphics.print("oy: "..img[i].oy, (i-1)*200, 70+14*6)
+        love.graphics.print("getWidth: "..img[i].image:getWidth(), (i-1)*200, 70+14*7)
+        love.graphics.print("getHeight: "..img[i].image:getHeight(), (i-1)*200, 70+14*8)
+        
+        -- Bounding Boxes
+        love.graphics.rectangle(
+            "line",
+            (i-1)*200-img[i].ox-0.5,
+            70+14*9-img[i].oy-0.5,
+            img[i].image:getWidth()+1,
+            img[i].image:getHeight()+1)
 
-		love.graphics.setColor(255,255,255)
-		love.graphics.draw(
-			img[i].image,
-			(i-1)*200,
-			70+14*9,
-			nil,
-			nil,
-			nil,
-			img[i].ox,
-			img[i].oy)
-	end
-	
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.draw(
+            img[i].image,
+            (i-1)*200,
+            70+14*9,
+            nil,
+            nil,
+            nil,
+            img[i].ox,
+            img[i].oy)
+    end
+    
 end
 ```
 ### Layer Types
@@ -148,30 +148,30 @@ There's sample code for these first 5 blendmodes.
 ![](https://u.pomf.is/exmlfg.png)
 ```lua
 local artal = require("artal")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(1, 1, 1)
 
 local fileData = love.filesystem.newFileData("sample.psd")
 img = artal.newPSD(fileData,"info")
 
 for i = 1, #img do
-	if img[i].type == "image" and string.find(img[i].name, "Blob") then -- Only load layers with Blob in the name
-		img[i].image = love.graphics.newImage(artal.newPSD(fileData, i))
-	end
+    if img[i].type == "image" and string.find(img[i].name, "Blob") then -- Only load layers with Blob in the name
+        img[i].image = love.graphics.newImage(artal.newPSD(fileData, i))
+    end
 end
 
 function love.draw()
-	for i = 1, #img do
-		if img[i].image then
-	        love.graphics.draw(
-	            img[i].image,
-	            nil,
-	            nil,
-	            nil,
-	            nil,
-	            nil,
-	            img[i].ox,
-	            img[i].oy)
-	    end
+    for i = 1, #img do
+        if img[i].image then
+            love.graphics.draw(
+                img[i].image,
+                nil,
+                nil,
+                nil,
+                nil,
+                nil,
+                img[i].ox,
+                img[i].oy)
+        end
     end
 end
 ```
@@ -185,54 +185,54 @@ tableAsString = writetable.createStringFromTable(table)
 
 ```lua
 {
-	-- Table with 4 indexes, and 2 string keys.
-	-- Array values are all of type: "table".
-	height = 200,
-	width = 200,
-	[1] = 
-	{
-		-- Table with 7 string keys.
-		oy = 0,
-		image = "Image: 0x6b119bff80",
-		ox = 0,
-		type = "image",
-		blend = "norm",
-		name = "Background",
-		clip = false,
-	},
-	[2] = 
-	{
-		-- Table with 7 string keys.
-		oy = -40,
-		image = "Image: 0x6b119c0140",
-		ox = -68,
-		type = "image",
-		blend = "norm",
-		name = "Red Blob",
-		clip = false,
-	},
-	[3] = 
-	{
-		-- Table with 7 string keys.
-		oy = -17,
-		image = "Image: 0x6b119c0220",
-		ox = -95,
-		type = "image",
-		blend = "norm",
-		name = "Blue Blob",
-		clip = true,
-	},
-	[4] = 
-	{
-		-- Table with 7 string keys.
-		oy = -27,
-		image = "Image: 0x6b12844c80",
-		ox = -8,
-		type = "image",
-		blend = "over",
-		name = "Multiple Blobs",
-		clip = true,
-	},
+    -- Table with 4 indexes, and 2 string keys.
+    -- Array values are all of type: "table".
+    height = 200,
+    width = 200,
+    [1] = 
+    {
+        -- Table with 7 string keys.
+        oy = 0,
+        image = "Image: 0x6b119bff80",
+        ox = 0,
+        type = "image",
+        blend = "norm",
+        name = "Background",
+        clip = false,
+    },
+    [2] = 
+    {
+        -- Table with 7 string keys.
+        oy = -40,
+        image = "Image: 0x6b119c0140",
+        ox = -68,
+        type = "image",
+        blend = "norm",
+        name = "Red Blob",
+        clip = false,
+    },
+    [3] = 
+    {
+        -- Table with 7 string keys.
+        oy = -17,
+        image = "Image: 0x6b119c0220",
+        ox = -95,
+        type = "image",
+        blend = "norm",
+        name = "Blue Blob",
+        clip = true,
+    },
+    [4] = 
+    {
+        -- Table with 7 string keys.
+        oy = -27,
+        image = "Image: 0x6b12844c80",
+        ox = -8,
+        type = "image",
+        blend = "over",
+        name = "Multiple Blobs",
+        clip = true,
+    },
 }
 ```
 
@@ -262,7 +262,7 @@ resultCanvas = psdShader.flatten(psdTableClipTo, psdTableBeingClipped, ...)
 ```lua
 local artal = require("artal")
 local psdShader = require("psdShader")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(1, 1, 1)
 
 img = artal.newPSD("sample.psd")
 
@@ -270,12 +270,12 @@ local blendShader = {}
 blendShader.clip = love.graphics.newShader(psdShader.createShaderString("norm", "norm", "over"))
 
 function love.draw()
-	love.graphics.draw(img[1].image,nil,nil,nil,nil,nil,img[1].ox,img[1].oy)
-	psdShader.setShader(blendShader.clip)
-	psdShader.drawClip(1,img[3].image,nil,nil,nil,nil,nil,img[3].ox,img[3].oy)
-	psdShader.drawClip(2,img[4].image,nil,nil,nil,nil,nil,img[4].ox,img[4].oy)
-	love.graphics.draw(img[2].image,nil,nil,nil,nil,nil,img[2].ox,img[2].oy)
-	love.graphics.setShader()
+    love.graphics.draw(img[1].image,nil,nil,nil,nil,nil,img[1].ox,img[1].oy)
+    psdShader.setShader(blendShader.clip)
+    psdShader.drawClip(1,img[3].image,nil,nil,nil,nil,nil,img[3].ox,img[3].oy)
+    psdShader.drawClip(2,img[4].image,nil,nil,nil,nil,nil,img[4].ox,img[4].oy)
+    love.graphics.draw(img[2].image,nil,nil,nil,nil,nil,img[2].ox,img[2].oy)
+    love.graphics.setShader()
 end
 ```
 
@@ -284,7 +284,7 @@ end
 ```lua
 local artal = require("artal")
 local psdShader = require("psdShader")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(1, 1, 1)
 
 img = artal.newPSD("sample.psd")
 
@@ -299,26 +299,26 @@ canvas[2] = love.graphics.newCanvas(love.graphics.getDimensions())
 
 function love.draw()
 
-	love.graphics.setCanvas(canvas[1])
-	love.graphics.clear(255,255,255)
+    love.graphics.setCanvas(canvas[1])
+    love.graphics.clear(1, 1, 1)
 
-	for i = 1, #img do
-		if img[i].blend == "mul" or
-			img[i].blend == "over" or
-			img[i].blend == "scrn" then
-			
-			psdShader.setShader(blendShader[img[i].blend],canvas[1],canvas[2])
-		end
-		love.graphics.draw(img[i].image,nil,nil,nil,nil,nil,img[i].ox,img[i].oy)
-		love.graphics.setShader()
-	end
-	
-	-- Draw result to screen
-	local preCanvas = love.graphics.getCanvas()
-	love.graphics.setCanvas(nil)
-	love.graphics.setBlendMode("alpha","premultiplied")
-	love.graphics.draw(preCanvas)
-	love.graphics.setBlendMode("alpha")
+    for i = 1, #img do
+        if img[i].blend == "mul" or
+            img[i].blend == "over" or
+            img[i].blend == "scrn" then
+            
+            psdShader.setShader(blendShader[img[i].blend],canvas[1],canvas[2])
+        end
+        love.graphics.draw(img[i].image,nil,nil,nil,nil,nil,img[i].ox,img[i].oy)
+        love.graphics.setShader()
+    end
+    
+    -- Draw result to screen
+    local preCanvas = love.graphics.getCanvas()
+    love.graphics.setCanvas(nil)
+    love.graphics.setBlendMode("alpha","premultiplied")
+    love.graphics.draw(preCanvas)
+    love.graphics.setBlendMode("alpha")
 end
 ```
 ### Blend and Clipping
@@ -326,7 +326,7 @@ end
 ```lua
 local artal = require("artal")
 local psdShader = require("psdShader")
-love.graphics.setBackgroundColor(255,255,255)
+love.graphics.setBackgroundColor(1, 1, 1)
 
 img = artal.newPSD("sample.psd")
 
@@ -338,22 +338,22 @@ canvas[1] = love.graphics.newCanvas(love.graphics.getDimensions())
 canvas[2] = love.graphics.newCanvas(love.graphics.getDimensions())
 
 function love.draw()
-	love.graphics.setCanvas(canvas[1])
-	love.graphics.clear(255,255,255)
+    love.graphics.setCanvas(canvas[1])
+    love.graphics.clear(1, 1, 1)
 
-	love.graphics.draw(img[1].image,nil,nil,nil,nil,nil,img[1].ox,img[1].oy)
+    love.graphics.draw(img[1].image,nil,nil,nil,nil,nil,img[1].ox,img[1].oy)
     psdShader.setShader(blendShader.clipAndBlend, canvas[1], canvas[2])
     psdShader.drawClip(1,img[3].image,nil,nil,nil,nil,nil,img[3].ox,img[3].oy)
     psdShader.drawClip(2,img[4].image,nil,nil,nil,nil,nil,img[4].ox,img[4].oy)
     love.graphics.draw(img[2].image,nil,nil,nil,nil,nil,img[2].ox,img[2].oy)
     love.graphics.setShader()
-	
-	-- Draw result to screen
-	local preCanvas = love.graphics.getCanvas()
-	love.graphics.setCanvas(nil)
-	love.graphics.setBlendMode("alpha","premultiplied")
-	love.graphics.draw(preCanvas)
-	love.graphics.setBlendMode("alpha")
+    
+    -- Draw result to screen
+    local preCanvas = love.graphics.getCanvas()
+    love.graphics.setCanvas(nil)
+    love.graphics.setBlendMode("alpha","premultiplied")
+    love.graphics.draw(preCanvas)
+    love.graphics.setBlendMode("alpha")
 end
 ```
 

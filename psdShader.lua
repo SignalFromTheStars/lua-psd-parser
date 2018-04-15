@@ -173,7 +173,7 @@ function psdShader.setShader(shader,swapCanvas1,swapCanvas2)
 	end
 	
 
-	if shader:getExternVariable("canvas") then
+	if shader:hasUniform("canvas") then
 		assert(type(swapCanvas1) == "userdata" and
 			swapCanvas1:type() == "Canvas",
 			"psdShader: shader requires swapCanvas: argument 2 and 3.")
@@ -197,7 +197,7 @@ function psdShader.setShader(shader,swapCanvas1,swapCanvas2)
 	love.graphics.setShader(shader)
 	
 
-	if shader:getExternVariable("canvasSize") then
+	if shader:hasUniform("canvasSize") then
 		shader:send("canvasSize",{canvasWidth,canvasHeight})
 	end
 end
@@ -232,7 +232,7 @@ function psdShader.drawClip(drawOrderIndex,image,x,y,r,sx,sy,ox,oy,kx,ky)
 	assert(kx == 0, "psdShader.drawClip: Shearing for clipping layers not implemented.")
 	assert(ky == 0, "psdShader.drawClip: Shearing for clipping layers not implemented.")
 
-	assert(shader:getExternVariable("clipImage"..drawOrderIndex),
+	assert(shader:hasUniform("clipImage"..drawOrderIndex),
 		"psdShader.drawClip: Shader does not have this index: "..drawOrderIndex)
 	
 	shader:send("clipImage"..drawOrderIndex,image)
@@ -243,7 +243,7 @@ function psdShader.drawClip(drawOrderIndex,image,x,y,r,sx,sy,ox,oy,kx,ky)
 	local sendSizeX = image:getWidth() * sx
 	local sendSizeY = image:getHeight() * sy
 	shader:send("clipImage"..drawOrderIndex.."Pos",{sendX, sendY})
-	if shader:getExternVariable("clipImage"..drawOrderIndex.."size") then -- For the in shader "clampzero" mode
+	if shader:hasUniform("clipImage"..drawOrderIndex.."size") then -- For the in shader "clampzero" mode
 		shader:send("clipImage"..drawOrderIndex.."size",{sendSizeX, sendSizeY})
 	end
 	shader:send("clipImage"..drawOrderIndex.."sizeDifference",{sendScaleX, sendScaleY})
@@ -257,7 +257,7 @@ function psdShader.flatten(psdTableClippedTo,...)
 	love.graphics.setBlendMode("replace","premultiplied")
 	love.graphics.setCanvas(canvas)
 	love.graphics.clear(0,0,0,0)
-	love.graphics.setColor(255,255,255)
+	love.graphics.setColor(1,1,1)
 
 	local blendList = {}
 	for i = 1, #psdClipTable do

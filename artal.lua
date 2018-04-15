@@ -472,9 +472,8 @@ end
 
 function artalFunction.newPSD(fileNameOrData, structureFlagOrNumber)
 	local GC_C_fileData
-
 	if type(fileNameOrData) == "string" then
-		assert(love.filesystem.exists(fileNameOrData), "Artal: PSD file do not exist.")
+		assert(love.filesystem.getInfo(fileNameOrData, "file") ~= nil, "Artal: PSD file do not exist.")
 		GC_C_fileData = love.filesystem.newFileData(fileNameOrData)
 	elseif type(fileNameOrData) == "userdata" and fileNameOrData:type() == "FileData" then
 		GC_C_fileData = fileNameOrData
