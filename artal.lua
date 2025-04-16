@@ -438,6 +438,12 @@ local function defaultLoadImageInfoFunction(artalLayer,layerLoadData,folderStack
 		layer.clip = true
 	end
 
+	layer.transparencyProtected = artalLayer.transparencyProtected
+	layer.isVisible = artalLayer.isVisible
+	layer.obsoleteFlag = artalLayer.obsoleteFlag
+	layer.pixelIrrelevant = artalLayer.pixelIrrelevant
+	layer.maskIrrelevant = artalLayer.maskIrrelevant
+
 	local thereExistImageData = artalNewLayerImageData(layerLoadData,true)
 	if thereExistImageData then
 		layer.type = "image"
