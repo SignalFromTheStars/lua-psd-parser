@@ -408,6 +408,12 @@ local function defaultLoadImageFunction(artalLayer,layerLoadData,folderStack,lay
 		layer.clip = true
 	end
 
+	layer.transparencyProtected = artalLayer.transparencyProtected
+	layer.isVisible = artalLayer.isVisible
+	layer.obsoleteFlag = artalLayer.obsoleteFlag
+	layer.pixelIrrelevant = artalLayer.pixelIrrelevant
+	layer.maskIrrelevant = artalLayer.maskIrrelevant
+
 	local imageData = artalNewLayerImageData(layerLoadData)
 	if imageData then
 		layer.image = love.graphics.newImage(imageData)
@@ -594,6 +600,12 @@ function artalFunction.newPSD(fileNameOrData, structureFlagOrNumber)
 		artal.layer[LC].betterName = artal.layer[LC].name
 		artal.layer[LC].betterBlend = artal.layer[LC].blendShortName
 		artal.layer[LC].betterCliping = artal.layer[LC].clipping
+		-- Flags
+		artal.layer[LC].transparencyProtected = bit.band(artal.layer[LC].flags, 0x01) ~= 0
+		artal.layer[LC].isVisible              = bit.band(artal.layer[LC].flags, 0x02) == 0
+		artal.layer[LC].obsoleteFlag           = bit.band(artal.layer[LC].flags, 0x04) ~= 0
+		artal.layer[LC].pixelIrrelevant        = bit.band(artal.layer[LC].flags, 0x08) ~= 0
+		artal.layer[LC].maskIrrelevant         = bit.band(artal.layer[LC].flags, 0x10) ~= 0
 
 		--Pascal String padding
 		if ((artal.layer[LC].nameLength+1)/4) ~= math.floor((artal.layer[LC].nameLength+1)/4) then
