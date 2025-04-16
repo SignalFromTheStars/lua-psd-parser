@@ -385,14 +385,6 @@ local function artalNewLayerImageData(layerLoadData,askIsImageLayer)
 	if dataSize == 0 then
 		return nil
 	else
-		-- Removes hidden RGB artifacts from fully transparent areas.
-		for i = 0, dataSize - 4, 4 do
-			if C_data[i + 3] == 0 then
-				C_data[i + 0] = 0
-				C_data[i + 1] = 0
-				C_data[i + 2] = 0
-			end
-		end
 		return imageData
 	end
 end
